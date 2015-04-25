@@ -1,0 +1,28 @@
+<html>
+<body style="width:100%; height:auto; margin:0; padding:0;">
+
+<script>
+function swap() { 
+  var img1 = document.getElementById('ImageId1');
+  var img2 = document.getElementById('ImageId2');
+  var txt = document.getElementById('TextId');
+  
+  if (img1.style.display === "none") {
+  	img1.style.display = "block"
+  	img2.style.display = "none"
+  	txt.innerHTML = "Previous state";
+  } else {
+  	img1.style.display = "none"
+  	img2.style.display = "block"
+	txt.innerHTML = "Current state";
+  }
+}
+</script>
+
+<div style="position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.5; text-align:center;">Click on image to swap between current and previous state</div>
+<div style="position: absolute;"> <h1 style="margin:10px;" id='TextId'>Current state</h1></div>
+<img style="display: none; width:100%; height:auto;" id='ImageId1' src='previous.png' onclick='swap();' />
+<img style="display: block; width:100%; height:auto;" id='ImageId2' src='current.png' onclick='swap();' />
+</body>
+
+</html>
