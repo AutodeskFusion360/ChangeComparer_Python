@@ -6,6 +6,17 @@
 import adsk.core, adsk.fusion, traceback, os
 # WebPageDirectory path, where we'll store the images and the html page
 wpd = os.path.dirname(os.path.realpath(__file__)) + '/resources/webpage'
+snapshotCamera = None
+
+def getCamera():
+    app = adsk.core.Application.get()
+    vp = app.activeViewport
+    return vp.camera     
+
+def restoreCamera(camera):
+    app = adsk.core.Application.get()
+    vp = app.activeViewport
+    vp.camera = camera    
 
 # save the current view of the model    
 def saveImage(fileName):
@@ -13,6 +24,9 @@ def saveImage(fileName):
     vp = app.activeViewport
     ret = app.activeViewport.saveAsImageFile(fileName, vp.width, vp.height)      
     ui = app.userInterface
+    
+    global snapshotCamera
+    snapshotCamera = vp.camera
 
     if not ret:
         ui.messageBox('Could not save image')
@@ -26,8 +40,8 @@ def showWebPage():
  
 # global set of event handlers to keep them referenced for the duration of the command
 handlers = []
-saveCommandId = 'ComparerSaveCmd'
-viewCommandId = 'ComparerViewCmd'
+isSavingSnapshot = True
+commandId = 'ComparerCmd'
 
 # some utility functions
 def commandDefinitionById(id):
@@ -72,7 +86,7 @@ def addCommandToPanel(panel, commandId, commandName, commandDescription, command
         commandDefinitionPanel_ = commandDefinitions_.itemById(commandId)
         if not commandDefinitionPanel_:
             commandDefinitionPanel_ = commandDefinitions_.addButtonDefinition(commandId, commandName, commandDescription, commandResources)
-        #onCommandCreated = CommandCreatedEventHandlerPanel()
+        
         commandDefinitionPanel_.commandCreated.add(onCommandCreated)
         # keep the handler referenced beyond this function
         handlers.append(onCommandCreated)
@@ -96,86 +110,72 @@ def run(context):
         ui  = app.userInterface
         
         # command properties
-        saveCommandName = 'Comparer Save'
-        saveCommandDescription = 'Compare Save'
-        saveCommandResources = './resources/comparer_save'
-        viewCommandName = 'Comparer View'
-        viewCommandDescription = 'Compare View'      
-        viewCommandResources = './resources/comparer_view'
+        saveCommandName = 'Save Snapshot'
+        saveCommandResources = './resources/comparer'
+        viewCommandName = 'Compare To Snapshot'
 
-        # "Comparer Save" command
-        class SaveCommandExecuteHandler(adsk.core.CommandEventHandler):
+        # our command
+        class CommandExecuteHandler(adsk.core.CommandEventHandler):
             def __init__(self):
                 super().__init__()
             def notify(self, args):
+                global isSavingSnapshot
                 try:
-                    # delete "current.png" because that should be done
-                    # by the "Comparer View" command 
-                    try:
-                        os.remove(wpd + '/current.png')
-                    except:
-                        None    
-                    
-                    # now save image as previous
-                    saveImage(wpd + '/previous.png')
-                except:
-                    if ui:
-                        ui.messageBox('command executed failed:\n{}'.format(traceback.format_exc()))
-
-        class SaveCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
-            def __init__(self):
-                super().__init__() 
-            def notify(self, args):
-                try:
-                    cmd = args.command
-                    onExecute = SaveCommandExecuteHandler()
-                    cmd.execute.add(onExecute)
-
-                    # keep the handler referenced beyond this function
-                    handlers.append(onExecute)
-                except:
-                    if ui:
-                        ui.messageBox('Panel command created failed:\n{}'.format(traceback.format_exc()))
-         
-        # "Comparer View" command                
-        class ViewCommandExecuteHandler(adsk.core.CommandEventHandler):
-            def __init__(self):
-                super().__init__()
-            def notify(self, args):
-                try:
-                    # save the current image if it does not exist yet
-                    if not os.path.isfile(wpd + '/current.png'):
+                    # are we saving a snapshot ...
+                    if isSavingSnapshot:
+                        # save view snapshot as previous.png
+                        # this will also store the current camera
+                        # in snapshotCamera global variable
+                        saveImage(wpd + '/previous.png')
+    
+                        # update the command text
+                        saveCommand = commandDefinitionById(commandId)
+                        saveCommand.controlDefinition.name = viewCommandName
+                        saveCommand.tooltip = viewCommandName
+                        
+                        isSavingSnapshot = False
+                    # ... or showing the difference to the previously saved snapshot    
+                    else:                     
+                        camera = getCamera()    
+                        restoreCamera(snapshotCamera)    
                         saveImage(wpd + '/current.png')
+                        restoreCamera(camera)
                     
-                    # now open the webpage that shows our two images
-                    showWebPage()
+                        # now open the webpage that shows our two images
+                        showWebPage()
+                        
+                        # update the command text
+                        saveCommand = commandDefinitionById(commandId)
+                        saveCommand.controlDefinition.name = saveCommandName
+                        saveCommand.tooltip = saveCommandName
+                        
+                        isSavingSnapshot = True
                 except:
                     if ui:
                         ui.messageBox('command executed failed:\n{}'.format(traceback.format_exc()))
 
-        class ViewCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
+        class CommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
             def __init__(self):
                 super().__init__() 
             def notify(self, args):
                 try:
                     cmd = args.command
-                    onExecute = ViewCommandExecuteHandler()
+                    onExecute = CommandExecuteHandler()
                     cmd.execute.add(onExecute)
 
                     # keep the handler referenced beyond this function
                     handlers.append(onExecute)
                 except:
                     if ui:
-                        ui.messageBox('Panel command created failed:\n{}'.format(traceback.format_exc()))                    
+                        ui.messageBox('Panel command created failed:\n{}'.format(traceback.format_exc()))                
         
-        # add our commands on create panel in modeling workspace
+        # add our command on "Inspect" panel in "Modeling" workspace
         workspaces_ = ui.workspaces
         modelingWorkspace_ = workspaces_.itemById('FusionSolidEnvironment')
         toolbarPanels_ = modelingWorkspace_.toolbarPanels
-        # add the new commands under the fifth panel / "Inspect"
+        # add the new command under the fifth panel / "Inspect"
         toolbarPanel_ = toolbarPanels_.item(5) 
-        addCommandToPanel(toolbarPanel_, saveCommandId, saveCommandName, saveCommandDescription, saveCommandResources, SaveCommandCreatedEventHandler())
-        addCommandToPanel(toolbarPanel_, viewCommandId, viewCommandName, viewCommandDescription, viewCommandResources, ViewCommandCreatedEventHandler())
+        addCommandToPanel(toolbarPanel_, commandId, saveCommandName, saveCommandName, saveCommandResources, CommandCreatedEventHandler())
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
@@ -188,11 +188,7 @@ def stop(context):
         
         objArray = []
         
-        # Comparer Save
-        getControlAndDefinition(saveCommandId, objArray)
-
-        # Comparer View
-        getControlAndDefinition(viewCommandId, objArray)
+        getControlAndDefinition(commandId, objArray)
             
         for obj in objArray:
             destroyObject(ui, obj)
