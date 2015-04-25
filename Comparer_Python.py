@@ -110,7 +110,7 @@ def run(context):
         ui  = app.userInterface
         
         # command properties
-        saveCommandName = 'Save Snapshot'
+        saveCommandName = 'Save Snapshot For Comparison'
         saveCommandResources = './resources/comparer'
         viewCommandName = 'Compare To Snapshot'
 
