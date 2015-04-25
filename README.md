@@ -1,5 +1,6 @@
 # Comparer_Python
 Add-In that lets the user save a snapshot of the current model then compare it to a later state - written in Python
+The Add-In's idea comes from this idea station post: [Quick difference view between before and after an edit](http://forums.autodesk.com/t5/fusion-360-ideastation-request-a/quick-difference-view-between-before-and-after-an-edit/idi-p/5556293)
 
 ## Usage
 The Add-In provides a single command added to the "Model" workspace's "Inspect" panel, but it has two states:
