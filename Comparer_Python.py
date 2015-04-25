@@ -49,7 +49,7 @@ def commandControlByIdForPanel(id):
     workspaces_ = ui.workspaces
     modelingWorkspace_ = workspaces_.itemById('FusionSolidEnvironment')
     toolbarPanels_ = modelingWorkspace_.toolbarPanels
-    toolbarPanel_ = toolbarPanels_.item(0)
+    toolbarPanel_ = toolbarPanels_.item(5)
     toolbarControls_ = toolbarPanel_.controls
     toolbarControl_ = toolbarControls_.itemById(id)
     return toolbarControl_
@@ -172,8 +172,8 @@ def run(context):
         workspaces_ = ui.workspaces
         modelingWorkspace_ = workspaces_.itemById('FusionSolidEnvironment')
         toolbarPanels_ = modelingWorkspace_.toolbarPanels
-        # add the new commands under the first panel
-        toolbarPanel_ = toolbarPanels_.item(0) 
+        # add the new commands under the fifth panel / "Inspect"
+        toolbarPanel_ = toolbarPanels_.item(5) 
         addCommandToPanel(toolbarPanel_, saveCommandId, saveCommandName, saveCommandDescription, saveCommandResources, SaveCommandCreatedEventHandler())
         addCommandToPanel(toolbarPanel_, viewCommandId, viewCommandName, viewCommandDescription, viewCommandResources, ViewCommandCreatedEventHandler())
     except:
