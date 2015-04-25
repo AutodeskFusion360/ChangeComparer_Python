@@ -4,7 +4,7 @@ The Add-In's idea comes from this idea station post: [Quick difference view betw
 
 ## Usage
 The Add-In provides a single command added to the "Model" workspace's "Inspect" panel, but it has two states:
-- "Save Snapshot": this saves a snapshot of the current view. This also saves the current camera, so that the other command will be able to make sure that the other snapshot is taken from the same angle and with the same zoom.
+- "Save Snapshot For Comparison": this saves a snapshot of the current view. This also saves the current camera, so that the other command will be able to make sure that the other snapshot is taken from the same angle and with the same zoom.
 - "Compare To Snapshot": this also saves a snapshot of the current view, but as a different image and then shows the newly created image and the one previously created by the "Save Snapshot" command inside a webpage where the user can easily swap between the snapshot of the two states and compare them visually
  
 ## License
