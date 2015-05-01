@@ -1,147 +1,271 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/TR/REC-html40" xml:lang="en" dir="ltr" class="js">
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<title>Fusion 360 Exchange - Change Comparer  Help</title>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Fusion 360 Exchange - Change Comparer Help</title>
 </head>
 <style>
-html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, code, form, fieldset, legend, input, textarea, blockquote, table, th, td {
-  padding: 0;
-  margin: 0;
-}
-a{color:#1F5397;text-decoration:none}
-body {font-family:"Arial", "Helvetica", "sans-serif";font-size:12.0px;margin:15px}
-p {font-size:12.0px;line-height:16px;padding:0px;margin:5px 0px 5px 0px}
-h1 {font-size:22.0px;height="26px"}
-.separator-line {border-bottom;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#C3C3C3}
-h2 {font-size:16.0px;line-height:18px;height:16px;margin-bottom:3px;margin-top:15px}
-h3 {font-size:14.0px;line-height:16px;height:14px;margin-bottom:3px;margin-top:15px}
-#plugin-icon{float:left;width:94px;height:94px}
-#plugin-name{margin-left:94px}
-#plugin-description{margin-left:94px;margin-top:3px;margin-bottom:40px}
-#navigation{margin-bottom:10px;clear:both}
-.nav-link-spacer {margin:0px 5px 0px 5px}
-.command {margin-top:5px;margin-bottom:3px}
-.command.icon {float:left;width:34px;height:34px}
-.command.name {font-weight:bold;padding-top:4px;margin:0px 0px 0px 34px}
-.command.description {margin:0px 0px 0px 34px}
-.versionset {margin-bottom:5px}
-.version {float:left;width:50px}
-.versioninfo-bullet {margin-left:50px}
-.screenshots {}
-.clearboth {clear:both}
-.thumbnail {float:left; width:207px;margin: 0px 20px 0px 0px}
-.caption { font-weight:bold}
+    html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, code, form, fieldset, legend, input, textarea, blockquote, table, th, td {
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+        color: #1F5397;
+        text-decoration: none
+    }
+
+    body {
+        font-family: "Arial", "Helvetica", "sans-serif";
+        font-size: 12.0px;
+        margin: 15px
+    }
+
+    p {
+        font-size: 12.0px;
+        line-height: 16px;
+        padding: 0px;
+        margin: 5px 0px 5px 0px
+    }
+
+    h1 {
+        font-size: 22.0px;
+        height = "26px"
+    }
+
+    .separator-line {
+        border-bottom;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #C3C3C3
+    }
+
+    h2 {
+        font-size: 16.0px;
+        line-height: 18px;
+        height: 16px;
+        margin-bottom: 3px;
+        margin-top: 15px
+    }
+
+    h3 {
+        font-size: 14.0px;
+        line-height: 16px;
+        height: 14px;
+        margin-bottom: 3px;
+        margin-top: 15px
+    }
+
+    #plugin-icon {
+        float: left;
+        width: 94px;
+        height: 94px
+    }
+
+    #plugin-name {
+        margin-left: 94px
+    }
+
+    #plugin-description {
+        margin-left: 94px;
+        margin-top: 3px;
+        margin-bottom: 40px
+    }
+
+    #navigation {
+        margin-bottom: 10px;
+        clear: both
+    }
+
+    .nav-link-spacer {
+        margin: 0px 5px 0px 5px
+    }
+
+    .command {
+        margin-top: 5px;
+        margin-bottom: 3px
+    }
+
+    .command.icon {
+        float: left;
+        width: 34px;
+        height: 34px
+    }
+
+    .command.name {
+        font-weight: bold;
+        padding-top: 4px;
+        margin: 0px 0px 0px 34px
+    }
+
+    .command.description {
+        margin: 0px 0px 0px 34px
+    }
+
+    .versionset {
+        margin-bottom: 5px
+    }
+
+    .version {
+        float: left;
+        width: 50px
+    }
+
+    .versioninfo-bullet {
+        margin-left: 50px
+    }
+
+    .screenshots {
+    }
+
+    .clearboth {
+        clear: both
+    }
+
+    .thumbnail {
+        float: left;
+        width: 207px;
+        margin: 0px 20px 0px 0px
+    }
+
+    .caption {
+        font-weight: bold
+    }
 </style>
 
 <body>
-  <div id="plugin-node" class="node right-box conent-area">
-  <div class="plugin-help">
-    <div id="heading">
-	  <div id="plugin-icon"><img width=64 height=64 src="resources/comparer/64x64.png"></div>
-	  <div id="plugin-name"><h1 class="separator-line">Change Comparer</h1></div>
-	  <p id="plugin-description">This Add-In lets the user save a snapshot of the current model then compare it to a later state - written in Python.</p>
-    </div>
-
-    <div id="navigation">
-      Getting Started<span class="nav-link-spacer">|</span>
-      <a href="#Install">Install/Uninstall</a><span class="nav-link-spacer">|</span>
-      <a href="#AdditionalInfo">Additional Information</a><span class="nav-link-spacer">|</span>
-      <a href="#Contact">Contact</a><span class="nav-link-spacer">|</span>
-      <a class="navigation-link" href="#VersionHistory">Version History</a>
-    </div>
-
-    <h2 id="GettingStarted" name="GettingStarted">Getting Started</h2>
-          <p>To launch the plug-in, use the following command</p>
-              <div class="command clearboth">
-	      <div class="command icon">
-	        	          <img width=32 height=32 src="resources/comparer/32x32.png" />
-	        	      </div>
-	      <div class="command name">
-            Change Comparer           </div>
-	      <div class="command command-description">
-	        Either takes a snapshot of the current view to compare to, or takes another snapshot that we can compare to the previous one.          </div>
+<div id="plugin-node" class="node right-box conent-area">
+    <div class="plugin-help">
+        <div id="heading">
+            <div id="plugin-icon"><img width=64 height=64 src="resources/comparer/64x64.png"></div>
+            <div id="plugin-name"><h1 class="separator-line">Change Comparer</h1></div>
+            <p id="plugin-description"><strong>Fusion 360</strong> add-in that lets the user save a snapshot of the current model then compare it to
+                a later state.</p>
         </div>
-          
-    <h3>Usage</h3>
-    <p>Once installed, the <strong>"Change Comparer"</strong> add-in will create a new button in the menu of the <strong>“Model”</strong> workspace's <strong>"Inspect"</strong> panel.<br />
 
-<img src="resources/readme/Comparer4.png" alt=""  />
-<br />
-When pressing this button, it does one of the below things:<br />
--	In its initial state the command's description is <strong>"Save Snapshot For Comparison"</strong>, in which case you can take the first snapshot that later on you will compare to<br />
--	Once the first snapshot has been taken the command's description will be <strong>"Compare To Snapshot"</strong>, in which case you can take a second snapshot and once that's done a webpage will be opened where you can switch between the two snapshot and can easily examine the visual difference between the two states of the model <br />
-See the screenshots for a more detailed description of the control:<br />
-</p>
+        <div id="navigation">
+            Getting Started<span class="nav-link-spacer">|</span>
+            <a href="#Install">Install/Uninstall</a><span class="nav-link-spacer">|</span>
+            <a href="#AdditionalInfo">Additional Information</a><span class="nav-link-spacer">|</span>
+            <a href="#Contact">Contact</a><span class="nav-link-spacer">|</span>
+            <a class="navigation-link" href="#VersionHistory">Version History</a>
+        </div>
+
+        <h2 id="GettingStarted" name="GettingStarted">Getting Started</h2>
+
+        <p>To launch the add-in, use the following command</p>
+
+        <div class="command clearboth">
+            <div class="command icon">
+                <img width=32 height=32 src="resources/comparer/32x32.png"/>
+            </div>
+            <div class="command name">
+                Change Comparer
+            </div>
+            <div class="command command-description">
+                Either takes a snapshot of the current view to compare to, or takes another snapshot that we can compare
+                the previous one to.
+            </div>
+        </div>
+
+        <h3>Usage</h3>
+
+        <p>Once installed, the <strong>"Change Comparer"</strong> add-in will create a new button in the menu of the
+            <strong>“Model”</strong> workspace's <strong>"Inspect"</strong> panel.<br/>
+
+            <img src="resources/readme/Comparer4.png" alt=""/>
+            <br/>
+            When pressing this button, it does one of the below things:<br/>
+            - In its initial state the command's description is <strong>"Save Snapshot For Comparison"</strong>, in
+            which case you can take the first snapshot that later on you will compare to<br/>
+            - Once the first snapshot has been taken the command's description will be <strong>"Compare To
+                Snapshot"</strong>, in which case you can take a second snapshot. Once that's done a webpage will be
+            opened where you can switch between the two snapshots and can easily examine the visual differences between
+            the two states of the model <br/>
+            See the screenshots for a more detailed description of the control:<br/>
+        </p>
 
 
-    <h3>Screenshots</h3>
-    <p>
-    <div class="screenshots">
-                  
+        <h3>Screenshots</h3>
+
+        <p>
+
+        <div class="screenshots">
+
             <div class="thumbnail">
-        <img src="resources/readme/Comparer1.png" alt="" width="207" height="200"/>
-        <br />
-        <span class="caption">Taking first snapshot</span>
-      </div>
-      
-          <div class="thumbnail">
-        <img src="resources/readme/Comparer2.png" alt="" width="207" height="200"/>
-        <br />
-        <span class="caption">Taking second snapshot </span>
-      </div>
+                <img src="resources/readme/Comparer1.png" alt="" width="207" height="200"/>
+                <br/>
+                <span class="caption">Taking first snapshot</span>
+            </div>
+
             <div class="thumbnail">
-        <img src="resources/readme/Comparer3.png" alt="" width="207" height="75"/>
-        <br />
-        <span class="caption">Webpage allowing you to compare the two states of the model  </span>
-      </div>
-     <br class="clearboth"/>
+                <img src="resources/readme/Comparer2.png" alt="" width="207" height="200"/>
+                <br/>
+                <span class="caption">Taking second snapshot </span>
+            </div>
+            <div class="thumbnail">
+                <img src="resources/readme/Comparer3.png" alt="" width="207" height="75"/>
+                <br/>
+                <span class="caption">Webpage allowing you to compare the two states of the model  </span>
+            </div>
+            <br class="clearboth"/>
+        </div>
+        </p>
+        <h2 id="Install" name="Install">Installation and Uninstallation</h2>
+
+        <p>
+            You can unload the add-in without uninstalling it by clicking the
+            <strong>"Stop"</strong> button when the add-in is selected in the list box on the <strong>"Add-Ins"</strong>
+            tab of the <strong>"Scripts and Add-Ins"</strong> dialog.<br/>
+            <br/>
+            Unchecking <strong>"Run on Startup"</strong> causes the add-in not to be loaded in future sessions of
+            <strong>Fusion 360</strong>.<br/>
+        </p>
+
+        <h2 id="AdditionalInfo" name="AdditionalInfo">Additional Information</h2>
+
+        <p> The source code for this add-in written in <a href="https://www.python.org">Python</a> is available inside the add-in's folder or on <a
+                href="https://github.com/AutodeskFusion360/ChangeComparer_Python">GitHub</a><br/>
+        </p>
+        <br/>
+        (C) Copyright 2015 by <a href="http://www.autodesk.com">Autodesk, Inc.</a> <br/>
+        <br/>
+        Permission to use, copy, modify, and distribute this software in <br/>
+        object code form for any purpose and without fee is hereby granted, <br/>
+        provided that the above copyright notice appears in all copies and <br/>
+        that both that copyright notice and the limited warranty and restricted <br/>
+        rights notice below appear in all supporting documentation.<br/>
+        <br/>
+        AUTODESK PROVIDES THIS PROGRAM "AS IS" AND WITH ALL FAULTS. <br/>
+        AUTODESK SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTY OF MERCHANTABILITY OR <br/>
+        FITNESS FOR A PARTICULAR USE. AUTODESK, INC. DOES NOT WARRANT THAT THE <br/>
+        OPERATION OF THE PROGRAM WILL BE UNINTERRUPTED OR ERROR FREE.
+
+        <h2 id="Contact" name="Contact">Contact</h2>
+
+        <p>This add-in was written by <a href="http://adndevblog.typepad.com/manufacturing/adam-nagy.html">Adam Nagy</a>.<br/>
+            Adam is a Developer Advocate at Autodesk, working as part of the Autodesk Developer Network program.<br/>
+
+        </p>
+
+        <h3>Support Information</h3>
+
+        <p>
+            Email us at <a href="mailto:fusion.apps@autodesk.com">fusion.apps@autodesk.com</a> with feedback or requests
+            for enhancements.
+        </p>
+
+        <h2 id="VersionHistory" name="VersionHistory">Version History</h2>
+
+        <p>
+
+        <div class="versionset">
+            <div class="version">1.0.0</div>
+            <div class="versioninfo-bullet">Original release<br/>
+            </div>
+        </div>
+        </p>
     </div>
-</p>
-    <h2 id="Install" name="Install">Installation and Uninstallation</h2>
-    <p>
-    You can unload the plugin without uninstalling it by clicking the<br />
-<strong>"Stop"</strong> button when the plugin is selected in the list box on the <strong>"Add-Ins"</strong> tab of the <strong>"Scripts and Add-Ins"</strong> dialog.<br />
-<br />
-Unchecking <strong>"Run on Startup"</strong> causes the plugin not to be loaded in future sessions of Inventor.<br />
- </p>
-
-    <h2 id="AdditionalInfo" name="AdditionalInfo">Additional Information</h2>
-   <p> The source code for this app is available inside the app's folder or on <a href="https://github.com/AutodeskFusion360/ChangeComparer_Python">GitHub</a><br />
-   </p>
-<br />
-(C) Copyright 2015 by Autodesk, Inc. <br />
-<br />
-Permission to use, copy, modify, and distribute this software in <br />
-object code form for any purpose and without fee is hereby granted, <br />
-provided that the above copyright notice appears in all copies and <br />
-that both that copyright notice and the limited warranty and restricted <br />
-rights notice below appear in all supporting documentation.<br />
-<br />
-AUTODESK PROVIDES THIS PROGRAM "AS IS" AND WITH ALL FAULTS. <br />
-AUTODESK SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTY OF MERCHANTABILITY OR <br />
-FITNESS FOR A PARTICULAR USE. AUTODESK, INC. DOES NOT WARRANT THAT THE <br />
-OPERATION OF THE PROGRAM WILL BE UNINTERRUPTED OR ERROR FREE. 
-    
-    <h2 id="Contact" name="Contact">Contact</h2>
-    <p>This plugin was written by Adam Nagy.<br />
-Adam is a Developer Advocate at Autodesk, working as part of the Autodesk Developer Network program.<br />
-
-</p>
-    <h3>Support Information</h3>
-    <p>
-    Email us at  <a href="mailto:fusion.apps@autodesk.com">fusion.apps@autodesk.com</a>  with feedback or requests for<br />
-enhancements.
-</p>
-    <h2 id="VersionHistory" name="VersionHistory">Version History</h2>
-    <p>
-          <div class="versionset">
-        <div class="version">1.0.0</div>
-        <div class="versioninfo-bullet">Original release<br />
-</div>
-      </div>
-    </p>
-  </div>
 </div>
 </body>
 </html>
