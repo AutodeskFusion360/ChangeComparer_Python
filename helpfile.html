@@ -15,7 +15,7 @@
         text-decoration: none
     }
 
-    body {
+    body, ul {
         font-family: "Arial", "Helvetica", "sans-serif";
         font-size: 12.0px;
         margin: 15px
@@ -30,11 +30,10 @@
 
     h1 {
         font-size: 22.0px;
-        height = "26px"
+        height: 26px;
     }
 
     .separator-line {
-        border-bottom;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         border-bottom-color: #C3C3C3
@@ -134,13 +133,12 @@
 </style>
 
 <body>
-<div id="plugin-node" class="node right-box conent-area">
+<div id="plugin-node" class="node right-box content-area">
     <div class="plugin-help">
         <div id="heading">
-            <div id="plugin-icon"><img width=64 height=64 src="resources/comparer/64x64.png"></div>
+            <div id="plugin-icon"><img alt="Change Comparer icon" width=64 height=64 src="resources/comparer/64x64.png"></div>
             <div id="plugin-name"><h1 class="separator-line">Change Comparer</h1></div>
-            <p id="plugin-description"><strong>Fusion 360</strong> add-in that lets the user save a snapshot of the current model then compare it to
-                a later state.</p>
+            <p id="plugin-description"><strong>Fusion 360</strong> add-in that lets the user visually compare the current state of the model to a previous one.</p>
         </div>
 
         <div id="navigation">
@@ -153,7 +151,7 @@
 
         <h2 id="GettingStarted" name="GettingStarted">Getting Started</h2>
 
-        <p>To launch the add-in, use the following command</p>
+        <p>To use the add-in, click the following command</p>
 
         <div class="command clearboth">
             <div class="command icon">
@@ -171,20 +169,22 @@
         <h3>Usage</h3>
 
         <p>Once installed, the <strong>"Change Comparer"</strong> add-in will create a new button in the menu of the
-            <strong>“Model”</strong> workspace's <strong>"Inspect"</strong> panel.<br/>
+            <strong>"Model"</strong> workspace's <strong>"Inspect"</strong> panel.<br/>
 
             <img src="resources/readme/Comparer4.png" alt=""/>
             <br/>
             When pressing this button, it does one of the below things:<br/>
-            - In its initial state the command's description is <strong>"Save Snapshot For Comparison"</strong>, in
-            which case you can take the first snapshot that later on you will compare to<br/>
-            - Once the first snapshot has been taken the command's description will be <strong>"Compare To
-                Snapshot"</strong>, in which case you can take a second snapshot. Once that's done a webpage will be
-            opened where you can switch between the two snapshots and can easily examine the visual differences between
-            the two states of the model <br/>
-            See the screenshots for a more detailed description of the control:<br/>
+            <ul>
+                <li>In its initial state the command's description is <strong>"Save Snapshot For Comparison"</strong>, in
+                which case you can take the first snapshot that later on you will compare to</li>
+                <li>After the first snapshot has been taken the command's description will be <strong>"Compare To
+                Snapshot"</strong>, in which case you can take a second snapshot that will be from exactly the same
+                angle and with the same zoom factor as the previous snapshot. <br />
+                Once that's done a web page will be
+                opened where you can switch between the two snapshots and can easily examine the visual differences between
+                the two states of the model - see screenshots:</li>
+            </ul>
         </p>
-
 
         <h3>Screenshots</h3>
 
@@ -206,7 +206,7 @@
             <div class="thumbnail">
                 <img src="resources/readme/Comparer3.png" alt="" width="207" height="75"/>
                 <br/>
-                <span class="caption">Webpage allowing you to compare the two states of the model  </span>
+                <span class="caption">Web page allowing you to compare the two states of the model  </span>
             </div>
             <br class="clearboth"/>
         </div>
