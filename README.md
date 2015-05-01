@@ -1,4 +1,4 @@
-# Comparer_Python
+# ChangeComparer_Python
 Add-In that lets the user compare the current model to a previous state - written in Python.
 The Add-In's idea comes from this idea station post: [Quick difference view between before and after an edit](http://forums.autodesk.com/t5/fusion-360-ideastation-request-a/quick-difference-view-between-before-and-after-an-edit/idi-p/5556293)
 
