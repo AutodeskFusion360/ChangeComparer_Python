@@ -42,6 +42,8 @@ def showWebPage():
 handlers = []
 isSavingSnapshot = True
 commandId = 'ComparerCmd'
+workspaceToUse = 'FusionSolidEnvironment'
+panelToUse = 'InspectPanel'
 
 # some utility functions
 def commandDefinitionById(id):
@@ -55,15 +57,17 @@ def commandDefinitionById(id):
     return commandDefinition_
 
 def commandControlByIdForPanel(id):
+    global workspaceToUse
+    global panelToUse
     app = adsk.core.Application.get()
     ui = app.userInterface
     if not id:
         ui.messageBox('commandControl id is not specified')
         return None
     workspaces_ = ui.workspaces
-    modelingWorkspace_ = workspaces_.itemById('FusionSolidEnvironment')
+    modelingWorkspace_ = workspaces_.itemById(workspaceToUse)
     toolbarPanels_ = modelingWorkspace_.toolbarPanels
-    toolbarPanel_ = toolbarPanels_.item(5)
+    toolbarPanel_ = toolbarPanels_.itemById(panelToUse)
     toolbarControls_ = toolbarPanel_.controls
     toolbarControl_ = toolbarControls_.itemById(id)
     return toolbarControl_
@@ -85,13 +89,15 @@ def addCommandToPanel(panel, commandId, commandName, commandDescription, command
     if not toolbarControlPanel_:
         commandDefinitionPanel_ = commandDefinitions_.itemById(commandId)
         if not commandDefinitionPanel_:
-            commandDefinitionPanel_ = commandDefinitions_.addButtonDefinition(commandId, commandName, commandDescription, commandResources)
+            commandDefinitionPanel_ = commandDefinitions_.addButtonDefinition(commandId, commandName, commandName, commandResources)
+            commandDefinitionPanel_.tooltipDescription = commandDescription
         
         commandDefinitionPanel_.commandCreated.add(onCommandCreated)
+        
         # keep the handler referenced beyond this function
         handlers.append(onCommandCreated)
         toolbarControlPanel_ = toolbarControlsPanel_.addCommand(commandDefinitionPanel_, commandId)
-        toolbarControlPanel_.isVisible = True    
+        toolbarControlPanel_.isVisible = True  
 
 def getControlAndDefinition(commandId, objects):
     commandControl_ = commandControlByIdForPanel(commandId)
@@ -111,8 +117,12 @@ def run(context):
         
         # command properties
         saveCommandName = 'Save Snapshot For Comparison'
+        saveCommandDescription = 'Saves a snapshot of the current model state so that ' \
+        'we can compare to it later'
         saveCommandResources = './resources/comparer'
         viewCommandName = 'Compare To Snapshot'
+        viewCommandDescription = 'Saves a snapshot of the current model state and opens ' \
+        'a web page where you can compare it to the previously saved state'
 
         # our command
         class CommandExecuteHandler(adsk.core.CommandEventHandler):
@@ -132,6 +142,7 @@ def run(context):
                         saveCommand = commandDefinitionById(commandId)
                         saveCommand.controlDefinition.name = viewCommandName
                         saveCommand.tooltip = viewCommandName
+                        saveCommand.tooltipDescription = viewCommandDescription
                         
                         isSavingSnapshot = False
                     # ... or showing the difference to the previously saved snapshot    
@@ -148,6 +159,7 @@ def run(context):
                         saveCommand = commandDefinitionById(commandId)
                         saveCommand.controlDefinition.name = saveCommandName
                         saveCommand.tooltip = saveCommandName
+                        saveCommand.tooltipDescription = saveCommandDescription
                         
                         isSavingSnapshot = True
                 except:
@@ -170,12 +182,14 @@ def run(context):
                         ui.messageBox('Panel command created failed:\n{}'.format(traceback.format_exc()))                
         
         # add our command on "Inspect" panel in "Modeling" workspace
+        global workspaceToUse
+        global panelToUse
         workspaces_ = ui.workspaces
-        modelingWorkspace_ = workspaces_.itemById('FusionSolidEnvironment')
+        modelingWorkspace_ = workspaces_.itemById(workspaceToUse)
         toolbarPanels_ = modelingWorkspace_.toolbarPanels
         # add the new command under the fifth panel / "Inspect"
-        toolbarPanel_ = toolbarPanels_.item(5) 
-        addCommandToPanel(toolbarPanel_, commandId, saveCommandName, saveCommandName, saveCommandResources, CommandCreatedEventHandler())
+        toolbarPanel_ = toolbarPanels_.itemById(panelToUse) 
+        addCommandToPanel(toolbarPanel_, commandId, saveCommandName, saveCommandDescription, saveCommandResources, CommandCreatedEventHandler())
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
