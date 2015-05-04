@@ -2,11 +2,11 @@
 	"autodeskProduct":	"Fusion360",
 	"type":	"addin",
 	"id":	"21aa3e00-c720-48e4-8e58-0bd6e07331a2",
-	"author":	"",
+	"author":	"Adam Nagy, Autodesk",
 	"description":	{
-		"":	""
+		"":	"Lets the user visually compare the current state of the model to a previous one"
 	},
-	"version":	"",
+	"version":	"1.0.0",
 	"runOnStartup":	true,
 	"supportedOS":	"windows|mac"
 }
